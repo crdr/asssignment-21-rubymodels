@@ -13,11 +13,11 @@ class MenuController
         puts "2 - Create an entry"
         puts "3 - Search for an entry"
         puts "4 - Import entries from a CSV"
-        puts "5 - Exit"
+        puts "5 - Nukes all entries"
+        puts "6 - Exit"
         print "Enter your selection: "
         
         selection = gets.to_i
-        
         case selection
         when 1
             system "clear"
@@ -36,6 +36,11 @@ class MenuController
             view_all_entries
             main_menu
         when 5
+            system "clear"
+            @address_book.nuke
+            puts "All entries have been removed"
+            main_menu
+        when 6
             puts "Good-bye!"
         exit(0)
         else
@@ -72,6 +77,7 @@ class MenuController
         puts "New entry created"
         
     end
+    
     def delete_entry(entry)
         @address_book.entries.delete(entry)
         puts "#{entry_name} has been deleted"
@@ -134,6 +140,7 @@ end
         puts "d - delete entry"
         puts "e - edit this entry"
         puts "m - return to main menu"
+        puts "nu - delete all entries"
         
         selection = $stdin.gets.chomp
         
@@ -148,6 +155,7 @@ end
         when "m"
             system "clear"
             main_menu
+        
         else
             system "clear"
             puts "#{selection} is not a valid input"
