@@ -9,16 +9,17 @@ RSpec.describe AddressBook do
         expect(entry.email).to eql expected_email
     end
     
-    context "#nuke" do
-        it "should delete all entries"
-        
-        book.add_entry('Ada Lovelace', '010.012.1815','augusta.king@lovelace.com')
-        book.add_entry('Ada Lovelace', '010.012.1815','augusta.king@lovelace.com')
-        book.add_entry('Ada Lovelace', '010.012.1815','augusta.king@lovelace.com')
-        
-        book.nuke
-        expect(book.entries.size).to eq 0
-    end
+    context ".nuke" do
+        it "should delete all entries" do
+            
+            book.add_entry('Ada Lovelace', '010.012.1815','augusta.king@lovelace.com')
+            book.add_entry('Ada Lovelace', '010.012.1815','augusta.king@lovelace.com')
+            book.add_entry('Ada Lovelace', '010.012.1815','augusta.king@lovelace.com')
+            
+            book.nuke
+            expect(book.entries.size).to eq 0
+        end
+    end    
     context "attributes" do
         it "should respond to entries" do
     
@@ -52,7 +53,7 @@ RSpec.describe AddressBook do
         end
     end
     context ".add_entry" do
-        it "adds only one entry to the address book" do
+        it "adds only one entries to the address book" do
     
             book.add_entry('Ada Lovelace', '010.012.1815','augusta.king@lovelace.com') 
         
@@ -105,7 +106,6 @@ RSpec.describe AddressBook do
             book.import_from_csv("entries.csv")
             entry_five = book.entries[4]
             check_entry(entry_five, "Sussie", "555-555-2036", "sussie@blocmail.com")
-            
         end
     end
     context "importing from entries_2.csv" do
@@ -160,25 +160,25 @@ RSpec.describe AddressBook do
             book.import_from_csv("entries.csv")
             entry = book.binary_search("Joe")
             expect(entry).to be_a Entry
-            check_entry("Joe", "555-555-3660, joe@blocmail.com")
+            check_entry(entry, "Joe", "555-555-3660", "joe@blocmail.com")
         end
         
         it "searches AddressBook for Sally" do
             book.import_from_csv("entries.csv")
             entry = book.binary_search("Sally")
             expect(entry).to be_a Entry
-            check_entry("Sally", "555-555-4646", "sally@blocmail.com")
+            check_entry(entry, "Sally", "555-555-4646", "sally@blocmail.com")
         end
         
         it "searches AddressBook for Sussie" do
             book.import_from_csv("entries.csv")
             entry = book.binary_search("Sussie")
             expect(entry).to be_a Entry
-            check_entry("Sussie", "555-555-2036", "sussie@blocmail.com")
+            check_entry(entry, "Sussie", "555-555-2036", "sussie@blocmail.com")
         end
         
         it "searches AddressBook for Billy" do
-            bppl.import_from_csv("entries.csv")
+            book.import_from_csv("entries.csv")
             entry = book.binary_search("Billy")
             expect(entry).to be_nil
         end
@@ -186,12 +186,12 @@ RSpec.describe AddressBook do
     
         #Test iterative_search for method
     context ".iterative_search" do
-       it "searches AddressBook for a non-existent entry" do
+        it "searches AddressBook for a non-existent entry" do
             book.import_from_csv("entries.csv")
             entry = book.iterative_search("Dan")
             expect(entry).to be_nil
         end
-            
+      
         it "searches AddressBook for Bill" do
             book.import_from_csv("entries.csv")
             entry = book.iterative_search("Bill")
@@ -210,26 +210,27 @@ RSpec.describe AddressBook do
             book.import_from_csv("entries.csv")
             entry = book.iterative_search("Joe")
             expect(entry).to be_a Entry
-            check_entry("Joe", "555-555-3660, joe@blocmail.com")
+            check_entry(entry, "Joe", "555-555-3660", "joe@blocmail.com")
         end
         
         it "searches AddressBook for Sally" do
             book.import_from_csv("entries.csv")
             entry = book.iterative_search("Sally")
             expect(entry).to be_a Entry
-            check_entry("Sally", "555-555-4646", "sally@blocmail.com")
+            check_entry(entry, "Sally", "555-555-4646", "sally@blocmail.com")
         end
         
         it "searches AddressBook for Sussie" do
             book.import_from_csv("entries.csv")
             entry = book.iterative_search("Sussie")
             expect(entry).to be_a Entry
-            check_entry("Sussie", "555-555-2036", "sussie@blocmail.com")
-        end
-        
+            check_entry(entry, "Sussie", "555-555-2036", "sussie@blocmail.com")
+       end     
         it "searches AddressBook for Billy" do
-            bppl.import_from_csv("entries.csv")
+            book.import_from_csv("entries.csv")
             entry = book.iterative_search("Billy")
             expect(entry).to be_nil
         end
+    end
 end
+

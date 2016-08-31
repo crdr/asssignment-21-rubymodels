@@ -123,7 +123,7 @@ end
             puts "No CSV file read"
             main_menu
         end
-    
+    end
     begin
         entry_count = @address_book.import_from_csv(file_name).count
         system "clear"
@@ -132,7 +132,6 @@ end
         puts "#{file_name} is not a valid CSV file, please enter the name of a valid CSV file"
         read_csv
     end
-
 
     def entry_submenu(entry)
         
@@ -188,4 +187,3 @@ end
             search_submenu(entry)
         end
     end
-    
